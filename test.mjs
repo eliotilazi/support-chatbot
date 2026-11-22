@@ -15,6 +15,8 @@ const cases = [
   ['Sa zgjat bateria e biçikletës elektrike?', 'ebike', 'sq'],
   ['merci', 'thanks', 'fr'],
   ['blablabla', 'unknown', 'en'],
+  ['Peux tu envoyer un message a Fortesa', 'unknown', 'fr'],
+  ['Je veux renvoyer mon colis', 'returns', 'fr'],
 ]
 
 let failed = 0

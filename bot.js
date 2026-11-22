@@ -34,7 +34,7 @@ function wordMatches(word, keyword) {
   if (word === keyword) return true
   if (keyword.length >= 5 && word.length >= 4) {
     if (word.startsWith(keyword.slice(0, 5)) || keyword.startsWith(word)) return true
-    return levenshtein(word, keyword) <= 1
+    return word[0] === keyword[0] && levenshtein(word, keyword) <= 1
   }
   return false
 }
@@ -47,7 +47,7 @@ function keywordScore(text, words, keyword) {
 }
 
 const LANG_HINTS = {
-  fr: ['je', 'vous', 'est', 'les', 'mon', 'ma', 'pour', 'une', 'quel', 'quels', 'bonjour', 'merci', 'livraison', 'commande', 'parler', 'humain', 'veux', 'suivre', 'ou'],
+  fr: ['je', 'vous', 'est', 'les', 'mon', 'ma', 'pour', 'une', 'quel', 'quels', 'bonjour', 'merci', 'livraison', 'commande', 'parler', 'humain', 'veux', 'suivre', 'ou', 'peux', 'tu', 'un'],
   sq: ['une', 'jam', 'eshte', 'nje', 'per', 'me', 'si', 'cfare', 'kur', 'porosi', 'faleminderit', 'pershendetje', 'ju', 'mund', 'ndiq', 'fol', 'njeri', 'ku', 'ime'],
   en: ['i', 'you', 'is', 'the', 'my', 'for', 'what', 'how', 'can', 'order', 'thanks', 'hello', 'do'],
 }
@@ -121,9 +121,6 @@ export function answer(message, state = {}) {
       reply: order ? TEXT.orderFound[lang](id, order) : TEXT.orderMissing[lang](id),
     }
   }
-  if (words.some((w) => ORDER_WORDS.some((o) => w.startsWith(o)))) {
-    return { lang, intent: 'order-ask', reply: TEXT.orderAsk[lang] }
-  }
   if (words.some((w) => HUMAN_WORDS.some((h) => w.startsWith(h)))) {
     return { lang, intent: 'human', reply: TEXT.human[lang], action: 'handoff' }
   }
@@ -138,6 +135,12 @@ export function answer(message, state = {}) {
     const score = all.reduce((sum, k) => sum + keywordScore(text, words, k), 0)
     if (score > best.score) best = { score, intent }
   }
-  if (best.score === 0) return { lang, intent: 'unknown', reply: TEXT.unknown[lang] }
+  if (best.score === 0) {
+    // No topic found: maybe the customer wants to track an order.
+    if (words.some((w) => ORDER_WORDS.some((o) => w.startsWith(o)))) {
+      return { lang, intent: 'order-ask', reply: TEXT.orderAsk[lang] }
+    }
+    return { lang, intent: 'unknown', reply: TEXT.unknown[lang] }
+  }
   return { lang, intent: best.intent.id, reply: best.intent.answer[lang] }
 }
