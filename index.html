@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Customer Support Chatbot | Eliot Ilazi</title>
+  <meta name="description" content="A multilingual customer support chatbot (English, French, Albanian) built in plain JavaScript. Portfolio project by Eliot Ilazi.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-in">
+      <span class="logo">Lakeside<span>Bikes</span></span>
+      <span class="badge">Demo company</span>
+    </div>
+  </header>
+
+  <main class="wrap layout">
+    <section class="intro">
+      <p class="kicker">Portfolio project</p>
+      <h1>A customer support chatbot that speaks three languages</h1>
+      <p>This assistant answers the most common questions of a bike shop: opening hours, delivery, returns, repairs, payment and order tracking. It recognises <strong>English, French and Albanian</strong>, tolerates typos, and hands the conversation to a human when needed.</p>
+      <h2>Try it</h2>
+      <ul class="tries">
+        <li><button data-try="What are your opening hours?">What are your opening hours?</button></li>
+        <li><button data-try="Combien de temps pour la livraison ?">Combien de temps pour la livraison ?</button></li>
+        <li><button data-try="Ku eshte porosia ime LB-1002?">Ku është porosia ime LB-1002?</button></li>
+        <li><button data-try="my brakse are broken">my brakse are broken (typo)</button></li>
+        <li><button data-try="Je veux parler à un humain">Je veux parler à un humain</button></li>
+      </ul>
+      <h2>How it works</h2>
+      <ol class="how">
+        <li><strong>Normalise</strong> the message: lowercase, accents removed (é, ë, ç).</li>
+        <li><strong>Detect the language</strong> from frequent small words and known keywords.</li>
+        <li><strong>Score each intent</strong> against its keywords, with typo tolerance (Levenshtein distance).</li>
+        <li><strong>Answer</strong> in the customer's language, or ask for an order number, or hand off to a human.</li>
+      </ol>
+      <p class="tech">Plain HTML, CSS and JavaScript (ES modules) · no framework · runs fully in the browser · <a href="https://github.com/eliotilazi/support-chatbot">source code</a></p>
+    </section>
+
+    <section class="chat" aria-label="Chat with the assistant">
+      <div class="chat-head">
+        <div class="avatar" aria-hidden="true">LB</div>
+        <div>
+          <strong>Lakeside Bikes support</strong>
+          <span class="online">Online · EN · FR · SQ</span>
+        </div>
+      </div>
+      <div class="messages" id="messages" role="log" aria-live="polite"></div>
+      <div class="chips" id="chips"></div>
+      <form class="handoff" id="handoff" hidden>
+        <input type="email" id="handoff-email" placeholder="your@email.com" required>
+        <button type="submit">Send</button>
+      </form>
+      <form class="composer" id="composer">
+        <input id="input" autocomplete="off" placeholder="Type your question…" aria-label="Your message">
+        <button type="submit" aria-label="Send">➤</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="wrap foot">Lakeside Bikes is a fictional company created for this demo. Built by <a href="https://eliotilazi.github.io">Eliot Ilazi</a>.</footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
