@@ -7,6 +7,7 @@ A customer support assistant for a fictional bike shop, **Lakeside Bikes**. It a
 ## Features
 
 - Automatic language detection (English, French, Albanian)
+- 26 topics: hours, address, contact, bikes and prices, sizes, test rides, rentals, accessories, delivery, returns, repairs, warranty, payment, discounts, gift cards, stock, used bikes, insurance, order changes, account, jobs and more
 - Intent matching with typo tolerance (Levenshtein distance)
 - Order tracking from an order number (try `LB-1001`, `LB-1002`, `LB-1003`)
 - Hand-off to a human with an email form
@@ -22,7 +23,7 @@ A customer support assistant for a fictional bike shop, **Lakeside Bikes**. It a
 | `bot.js` | The logic: normalise text, detect language, score intents, build the reply |
 | `app.js` | The chat interface in the page |
 | `style.css` | The design |
-| `test.mjs` | 13 test conversations that must give the right intent and language |
+| `test.mjs` | 80 test questions that must give the right topic (and language) |
 
 ## Run it locally
 

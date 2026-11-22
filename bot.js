@@ -42,7 +42,7 @@ function wordMatches(word, keyword) {
 // Score of one keyword against the message (multi-word keywords count more).
 function keywordScore(text, words, keyword) {
   const k = normalize(keyword)
-  if (k.includes(' ')) return text.includes(k) ? 2 : 0
+  if (k.includes(' ')) return text.includes(k) ? 3 : 0
   return words.some((w) => wordMatches(w, k)) ? 1 : 0
 }
 
@@ -94,9 +94,9 @@ const TEXT = {
     sq: 'Me kënaqësi! Diçka tjetër?',
   },
   unknown: {
-    en: 'I am not sure I understood. I can help with: opening hours, delivery, returns, repairs, payment, e-bikes, or tracking an order.',
-    fr: 'Je ne suis pas sûr d\'avoir compris. Je peux vous aider pour : horaires, livraison, retours, réparations, paiement, vélos électriques, ou suivi de commande.',
-    sq: 'Nuk jam i sigurt që e kuptova. Mund t\'ju ndihmoj për: orarin, dërgesën, kthimet, riparimet, pagesën, biçikletat elektrike ose ndjekjen e porosisë.',
+    en: 'I am not sure I understood. I can help with: opening hours, address, contact, bikes and prices, sizes, test rides, rentals, accessories, delivery, returns, repairs, warranty, payment, discounts, gift cards, insurance, or tracking an order. You can also ask to talk to a human.',
+    fr: 'Je ne suis pas sûr d\'avoir compris. Je peux vous aider pour : horaires, adresse, contact, vélos et prix, tailles, essais, location, accessoires, livraison, retours, réparations, garantie, paiement, réductions, cartes cadeaux, assurance ou suivi de commande. Vous pouvez aussi demander à parler à un humain.',
+    sq: 'Nuk jam i sigurt që e kuptova. Mund t\'ju ndihmoj për: orarin, adresën, kontaktin, biçikletat dhe çmimet, madhësitë, provat, qiranë, aksesorët, dërgesën, kthimet, riparimet, garancinë, pagesën, zbritjet, kartat dhuratë, sigurimin ose ndjekjen e porosisë. Mund të kërkoni edhe të flisni me një njeri.',
   },
 }
 
